@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const ProductsScreen(),
+    );
+  }
+}
+
+class ProductsScreen extends StatelessWidget {
+  const ProductsScreen({super.key});
+
+  Widget _buildProductItem(String imagePath, String price) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              imagePath,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'اسم المنتج',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'وصف قصير للمنتج',
+                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            price,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('قائمة المنتجات')),
+      body: ListView(
+        children: [
+          _buildProductItem('assets/images/albaqari.jpg', '\$9'),
+          const Divider(),
+          _buildProductItem('assets/images/abu_walad.jpg', '\$3'),
+          const Divider(),
+          _buildProductItem('assets/images/almumtaz.jpg', '\$5'),
+          const Divider(),
+        ],
+      ),
+    );
+  }
+}
