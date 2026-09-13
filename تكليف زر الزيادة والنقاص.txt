@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const CounterScreen(),
+    );
+  }
+}
+
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
+
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int counter = 15;
+
+  void _increment() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void _decrement() {
+    setState(() {
+      counter--;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('العداد')),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.remove_circle, color: Colors.red, size: 36),
+              onPressed: _decrement,
+            ),
+            const SizedBox(width: 20),
+            Text('$counter', style: const TextStyle(fontSize: 28)),
+            const SizedBox(width: 20),
+            IconButton(
+              icon: const Icon(Icons.add_circle, color: Colors.green, size: 36),
+              onPressed: _increment,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
